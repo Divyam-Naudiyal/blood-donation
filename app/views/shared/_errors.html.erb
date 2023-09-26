@@ -1,0 +1,15 @@
+<div class="contianer message-container ">
+    <% if obj.errors.any? %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">The following errors prevents User from being created</h4>
+            <ul>
+                <% obj.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true" class="message-close">&times;</span>
+            </button>
+        </div>
+    <% end %>
+</div>

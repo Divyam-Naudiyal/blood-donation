@@ -1,0 +1,26 @@
+<div class="container"><%= render 'shared/messages' %></div>
+<div class="page-content">
+    <div class="form-v10-content ">
+        <%= form_with scope: :session, url: login_path, class: "form-detail rounded", id: "myform", local: true do |f| %>
+            <div class="form-left">
+                <h2>Login Into GEHU Blood Donation Camp</h2>
+                <div class="form-row " >
+                    <%= f.email_field :email, placeholder:"Enter your registered Email",class: "form-text" %>
+                </div>
+                <div class="form-row">
+                     <%= f.password_field :password, class: "form-text", placeholder:"Enter your password" %>
+                </div>
+                <hr>
+                <div class="text-lefts rounded">
+                    <a class="register_2 text-lefts rounded text-center text-color <%= request.path == '/signup' ? 'active' : '' %>" href="/signup">Sign up</a>
+                </div>
+                 <div class="rounded register rights text-right">
+                    <%= f.submit "Login",class: "register text-color" %>
+                </div>
+            </div>
+            <div class="form-right">
+                <%= image_tag("blooddonation_login.png", class: "mx-auto d-block image-login", alt: "BloodDonation Logo") %>
+            </div>
+        <% end %>
+    </div>
+</div>

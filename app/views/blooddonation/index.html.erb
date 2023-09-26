@@ -1,0 +1,173 @@
+<div class="container">
+   <%= render 'shared/messages'%>
+   <div class="page-content mt-4">
+      <div class="form-v10-content">
+         <div class="form-detail rounded", id="myform">
+            <div class="form-left">
+               <h2 class="text-center"><%= t('all_request') %></h2>
+               <hr class="text-danger">
+               <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                     <div class="carousel-item active" data-bs-interval="2000">
+                        <br>
+                        <h1 class="main-heading text-center"><%= t('request') %></h1><br><br><br><br>
+                     </div>
+                     <% Post.all.order('created_at DESC').limit(50).each  do |post| %>
+                     <div class="carousel-item">
+                        <div class="card text-center shadow bg-white rounder">
+                           <div class="card-header"><i><%= post.username %></i></div>
+                           <div class="card-body">
+                              <p class="card-text"><u><b><%= post.title %></b></u></p>
+                              <p class="card-text"><%= post.description %></p>
+                              <p class="card-text"><%= t('blood_group') %> : <b><%= post.blood_group %></b></p>
+                           </div>
+                           <div class="card-footer text-muted"><small>Created <%= time_ago_in_words(post.created_at) %> ago, edited <%= time_ago_in_words(post.updated_at) %> ago</small></div>
+                        </div>
+                     </div>
+                     <% end %>
+                     <button class="carousel-control-next" type="button" id="clickButton" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                     <span class="visually-hidden"><% t('next') %></span>
+                  </div>
+               </div>
+               <hr class="text-danger">
+               <p class="text-center text-danger"><b><%= t('home-post-next-section') %></b></p>
+            </div><br>
+            <div class="form-right">
+               <% if Current.user%>
+               <h2 class="text-center"><%= t('create-post') %></h2>
+               <div class="form-row">
+                  <%= form_with model: @post, local: true do |f| %>
+                  <div class="form-row " >
+                     <%= f.text_field :title, placeholder:"Enter Title",class: "form-text" %>
+                  </div>
+                  <div class="form-group">
+                     <div class="form-row form-row-3">
+                        <%= f.text_field :username, value: Current.user.username,class: "form-text" %>
+                     </div>
+                     <div class="form-row form-row-2">
+                        <%= f.text_field :blood_group ,value: Current.user.blood_group,class: "form-text" %>
+                     </div>
+                  </div>
+                  <div class="form-row " >
+                     <%= f.text_field :description, placeholder:"Enter Description",class: "form-text" %>
+                  </div>
+                  <div class="rounded register rights home text-right">
+                     <%= f.submit "Post",class: "register text-color" %>
+                  </div>
+                  <% end %>
+               </div>
+               <% else %>
+               <h2 class="text-center"><%= t('gehu-camp') %></h2>
+               <br>
+               <div class="text-center"><b><%= t('login-request') %></b></div>
+               <br>
+               <div class="text-rights donated rounded">
+                  <a class="rounded btn btn-outline-danger login-btn text-center navbar-text<%= request.path == '/login' ? 'active' : '' %>" href="/login"><b><%= t('login') %></b></a>
+               </div>
+               <% end %>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="container"id="home-plasma-section">
+    <div class="row center-row">
+        <div class="col-xs col-sm col-md col-lg text-center">
+            <h1 class="main-heading"><%= t('plasma') %></h1>
+            <p class="centered-paragraph p-text"><%= t('plasma-about') %></p>
+            <%= image_tag ("structureofblood.png"),class: "ml-4 col-xs col-sm col-md col-lg image" %>
+            <h3 class="submain-heading"><%= t('plasma-donate-heading') %></h3>
+            <p class="centered-paragraph p-text"><%= t('plasma-donation-about') %></p>
+            <h3 class="submain-heading"><%= t("plasma-donation-heading") %></h3>
+            <div class="centered-paragraph p-text">
+               <b><%= t('plasma-donation-process-heading') %></b><br>
+               <li><%= t('plasma-donation-process-li-1') %></li>
+               <li><%= t('plasma-donation-process-li-2') %></li>
+               <li><%= t('plasma-donation-process-li-3') %></li>
+               <li><%= t('plasma-donation-process-li-4') %></li><br>
+               <%= t('plasma-donation-process-end') %>
+            </div>
+            <%= image_tag ("donateplasma.png"), class: "col-xs col-sm col-md col-lg image-2"%>
+        </div>
+    </div>
+    <div class="centered-paragraph p-text"><hr class="hr-class"></div>
+</div>
+<div class="container" id="home-why_give_blood-section">
+    <div class="row center-row">
+        <div class="col-xs col-sm col-md col-lg text-center">
+            <h1 class="main-heading"><%= t('why-donate-blood') %></h1>
+            <div class="centered-paragraph p-text"><%= t("why-donate-blood-para") %>
+            </div>
+            <%= image_tag ("1bag_3life.png"), class: "col-xs col-sm col-md col-lg image-2"%>
+        </div>
+    </div>
+    <div class="centered-paragraph p-text"><hr class="hr-class"></div>
+</div>
+<div class="container" id="home-who_can_give_blood-section">
+   <div class="row center-row">
+      <div class="col-xs col-sm col-md col-lg text-center">
+        <h1 class="main-heading"><%= t('who-can-donate-blood') %></h1>
+        <div class="centered-paragraph p-text"><%= t("who-can-donate-blood-para") %><br><br><b><%= t('who-can-donate-blood-end') %></b></div>
+        <iframe class="sm-6" height="300" src="https://www.youtube.com/embed/B6dAPXpUjCE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+   </div>
+   <div class="centered-paragraph p-text"><hr class="hr-class"></div>
+</div>
+<div class="container" id="home-donation_process-section">
+    <div class="row center-row">
+        <div class="col-xs col-sm col-md col-lg text-center">
+            <h1 class="main-heading"><%= t('donation-process-heading') %></h1>
+            <div class="centered-paragraph p-text"><b><%= t("donation-process-sub-heading-1") %></b><br><br>
+               <li><%= t("donation-process-sub-heading-1-li-1") %></li>
+               <li><%= t("donation-process-sub-heading-1-li-2") %></li><br>
+               <b><%= t("donation-process-sub-heading-2") %></b><br><br>
+               <%= t("donation-process-para-1") %><br><br>
+               <b><%= t("donation-process-sub-heading-3") %></b><br>
+               <%= t("donation-process-para-2") %><br><br>
+               <b><%= t("donation-process-sub-heading-4") %></b><br>
+               <%= t("donation-process-para-3") %><br><br>
+               <b><%= t("donation-process-sub-heading-5") %></b><br>
+               <%= t("donation-process-para-4") %>
+            </div>
+            <%= image_tag ("blooddonation-process.png"), class: "col-xs col-sm col-md col-lg image-3"%>
+            <div class="centered-paragraph p-text"><h5 class="submain-heading"><%= t("donation-process-end-heading") %></h5>
+               <b><%= t("donation-process-end-heading-b-1") %></b>
+               <li><%= t("donation-process-end-heading-li-1") %></li>
+               <li><%= t("donation-process-end-heading-li-2") %></li>
+               <li><%= t("donation-process-end-heading-li-3") %></li>
+               <b><%= t("donation-process-end-heading-b-2") %></b>
+            </div><br>
+             <%= image_tag ("blood-plasama-platelets-timeperiod.png"), class: "col-xs col-sm col-md col-lg image-2"%>
+        </div>
+    </div>
+    <div class="centered-paragraph p-text"><hr class="hr-class"></div>
+</div>
+<div class="container" id="home-about-section">
+   <div class="row center-row">
+      <div class="col-xs col-sm col-md col-lg text-center">
+         <h1 class="main-heading"><%= t("about-heading") %></h1>
+         <p class="main-description"><%= t("about-heading-discription") %></p>
+         <div class="centered-paragraph p-text"><%= t("about-paragraph") %></div>
+         <h3 class="submain-heading"><%= t("about-sub-heading") %></h3>
+         <div class="main-description"><%= t("about-sub-heading-description") %>
+            <div class="about-contributors-section">
+               <% @cores.each do |member| %>
+                  <div class="team-member-container team-link">
+                     <div class="team-underline text-center">
+                        <a target="_blank" href="<%= member[:link] %>"><%= image_tag member[:img], :class => "about-contributor-image " %><div class="team-footer underline name-text" ><%= member[:name] %></div></a>
+                     </div>
+                  </div>
+               <% end %>
+            </div>
+            <br><br>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br><br><br><br><br><br>
+<script >
+   window.onclick = function() {
+       document.getElementById('clickButton').click();
+   }
+</script>

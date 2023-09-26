@@ -1,0 +1,62 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require bootstrap
+ *= require_tree .
+ *= require_self
+ */
+ @import 'navbar';
+ @import 'form';
+ @import 'pages.scss';
+ @import 'footer.scss';
+ @import 'animate.scss';
+ @import 'logs.scss';
+ @import 'util.scss';
+ @import 'user_details.scss';
+
+.page-contents {
+  padding-top: 100px;
+}
+
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  
+  position: relative
+}
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border: 7px solid lightgrey;
+  box-shadow: inset 0 0 2.5px 2px rgba(0, 0, 0, .5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f37380;
+  
+}
+::-webkit-scrollbar-button:start {
+  height: 50px; //for vertical scrollbar
+}
